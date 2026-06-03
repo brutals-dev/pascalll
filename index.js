@@ -13,16 +13,25 @@ const client = new Client({
 client.commands = new Collection();
 
 /* =========================
-   LOAD COMMANDS
+   COMMAND LOADER (FIXED)
 ========================= */
 
 console.log("🚀 Starting bot...");
 
-const commandPath = path.join(__dirname, "commands");
+const commandPath = path.join(process.cwd(), "commands");
 
-const commandFiles = fs.readdirSync(commandPath).filter(f => f.endsWith(".js"));
+console.log("📁 Looking for commands in:", commandPath);
 
-console.log("📦 Commands found:", commandFiles);
+let commandFiles;
+
+try {
+  commandFiles = fs.readdirSync(commandPath).filter(file => file.endsWith(".js"));
+} catch (err) {
+  console.error("❌ Commands folder not found or empty:", err);
+  commandFiles = [];
+}
+
+console.log("📦 Found command files:", commandFiles);
 
 for (const file of commandFiles) {
   const filePath = path.join(commandPath, file);
