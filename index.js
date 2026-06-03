@@ -1,6 +1,5 @@
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const fs = require("fs");
-const config = require("./config.json");
 
 const client = new Client({
   intents: [
@@ -10,48 +9,67 @@ const client = new Client({
   ]
 });
 
-// command collection
 client.commands = new Collection();
 
-// load commands safely
+/* =========================
+   COMMAND LOADER (DEBUG)
+========================= */
+console.log("🚀 Loading commands...");
+
 const commandPath = __dirname + "/commands";
-const commandFiles = fs.readdirSync(commandPath).filter(file => file.endsWith(".js"));
+
+const commandFiles = fs.readdirSync(commandPath).filter(f => f.endsWith(".js"));
 
 for (const file of commandFiles) {
+  console.log("📂 Found file:", file);
+
   const command = require(`${commandPath}/${file}`);
-  if (command.name && command.execute) {
-    client.commands.set(command.name, command);
-    console.log(`Loaded command: ${command.name}`);
+
+  if (!command.name || !command.execute) {
+    console.log("❌ Invalid command:", file);
+    continue;
   }
+
+  client.commands.set(command.name, command);
+  console.log("✅ Loaded command:", command.name);
 }
 
-// message handler
+/* =========================
+   MESSAGE HANDLER (DEBUG)
+========================= */
 client.on("messageCreate", (message) => {
+  console.log("💬 Message detected:", message.content);
+
   if (message.author.bot) return;
 
-  if (!message.content.startsWith(config.prefix)) return;
+  const prefix = ".";
 
-  const args = message.content
-    .slice(config.prefix.length)
-    .trim()
-    .split(/ +/);
+  if (!message.content.startsWith(prefix)) return;
 
+  const args = message.content.slice(prefix.length).trim().split(/ +/);
   const cmd = args.shift().toLowerCase();
 
+  console.log("⚙️ Command used:", cmd);
+
   const command = client.commands.get(cmd);
-  if (!command) return;
+
+  if (!command) {
+    console.log("❌ Command not found:", cmd);
+    return;
+  }
 
   try {
     command.execute(message, args);
   } catch (err) {
-    console.error("Command error:", err);
-    message.reply("❌ Error running command.");
+    console.error("❌ Command error:", err);
   }
 });
 
-// ready event
+/* =========================
+   READY EVENT
+========================= */
 client.once("ready", () => {
-  console.log(`${client.user.tag} is ONLINE`);
+  console.log(`🤖 ONLINE: ${client.user.tag}`);
 });
 
 client.login(process.env.TOKEN);
