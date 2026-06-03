@@ -3,7 +3,7 @@ Client,
 GatewayIntentBits,
 Collection
 
-} = require("discord.js");
+}=require("discord.js");
 
 const fs=require("fs");
 
@@ -37,11 +37,9 @@ file=>file.endsWith(".js")
 
 for(const file of commandFiles){
 
-const command=require(
+const command=
 
-`./commands/${file}`
-
-);
+require(`./commands/${file}`);
 
 client.commands.set(
 
@@ -59,11 +57,7 @@ client.on(
 
 message=>{
 
-if(
-
-message.author.bot
-
-)return;
+if(message.author.bot)return;
 
 if(
 
@@ -107,11 +101,7 @@ if(!command)return;
 
 command.execute(
 
-message,
-
-args
-
-);
+message,args);
 
 }
 
