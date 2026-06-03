@@ -8,9 +8,7 @@ EmbedBuilder
 
 );
 
-const config=
-
-require(
+const config=require(
 
 "../config.json"
 
@@ -34,24 +32,31 @@ new EmbedBuilder()
 
 .setDescription(
 
-`💞 **tysm for partnering with us !!**
+`💞 **tysm for partnering with Pascal !!**
 
-① meet our requirements
+**① Meet our requirements**
 
 → <#${config.requirementsChannel}>
 
-② type \`.ad\`
+**② Type \`.ad\`**
 
-③ send uncropped proof
+Send our advertisement inside your server
 
-④ wait for staff review ✨`
+**③ Send proof**
+
+Take an UNCROPPED screenshot
+
+**④ Wait patiently**
+
+Staff will review your partnership ✨`
+
 )
 
 .setFooter({
 
 text:
 
-"partner system ♡"
+"Pascal Partnership System ♡"
 
 })
 
