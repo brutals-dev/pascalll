@@ -1,5 +1,6 @@
 const { Client, GatewayIntentBits, Collection } = require("discord.js");
 const fs = require("fs");
+const path = require("path");
 
 const client = new Client({
   intents: [
@@ -12,18 +13,20 @@ const client = new Client({
 client.commands = new Collection();
 
 /* =========================
-   COMMAND LOADER (DEBUG)
+   COMMAND LOADER
 ========================= */
-console.log("🚀 Loading commands...");
+console.log("🚀 Starting bot...");
 
-const commandPath = __dirname + "/commands";
+const commandPath = path.join(__dirname, "commands");
 
-const commandFiles = fs.readdirSync(commandPath).filter(f => f.endsWith(".js"));
+const commandFiles = fs.readdirSync(commandPath).filter(file => file.endsWith(".js"));
+
+console.log("📦 Commands found:", commandFiles);
 
 for (const file of commandFiles) {
-  console.log("📂 Found file:", file);
+  const filePath = path.join(commandPath, file);
 
-  const command = require(`${commandPath}/${file}`);
+  const command = require(filePath);
 
   if (!command.name || !command.execute) {
     console.log("❌ Invalid command:", file);
@@ -35,10 +38,10 @@ for (const file of commandFiles) {
 }
 
 /* =========================
-   MESSAGE HANDLER (DEBUG)
+   MESSAGE HANDLER
 ========================= */
 client.on("messageCreate", (message) => {
-  console.log("💬 Message detected:", message.content);
+  console.log("💬 Message:", message.content);
 
   if (message.author.bot) return;
 
@@ -54,7 +57,7 @@ client.on("messageCreate", (message) => {
   const command = client.commands.get(cmd);
 
   if (!command) {
-    console.log("❌ Command not found:", cmd);
+    console.log("❌ Command NOT FOUND:", cmd);
     return;
   }
 
