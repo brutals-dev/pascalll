@@ -1,5 +1,4 @@
 {
-  "token": "PUT_YOUR_BOT_TOKEN_HERE",
   "prefix": ".",
-  "requirementsChannel": "PUT_CHANNEL_ID_HERE"
+  "requirementsChannel": "PASTE_YOUR_CHANNEL_ID"
 }
