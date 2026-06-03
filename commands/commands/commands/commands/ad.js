@@ -26,28 +26,53 @@ new EmbedBuilder()
 
 .setTitle(
 
-"୨୧ Partner With Us ୨୧"
+"✦ PASCAL CLOTHING ✦"
 
 )
 
 .setDescription(
 
-`♡ active community
+`> The New Generation Of Clothing
 
-♡ partnerships open
+🛍️ Premium Roblox Clothing
 
-♡ giveaways
+✦ Original Designs
 
-♡ friendly members
+✦ Frequent Drops
 
-discord.gg/YOURINVITE`
+✦ Clean & Unique Fits
+
+✦ Styles For Every Aesthetic
+
+🎁 Weekly Giveaways
+
+✦ 300 Robux Every Week
+
+🌟 Why Join?
+
+✦ Active Community
+
+✦ Sneak Peeks & Events
+
+✦ Exclusive Content
+
+> Upgrade Your Avatar
+
+> Discover Your Next Favorite Fit
+
+✦ Pascal Clothing
+
+「 Style Starts Here 」
+
+discord.gg/pascal`
+
 )
 
 .setFooter({
 
 text:
 
-"thank you for supporting us ♡"
+"thank you for supporting Pascal ♡"
 
 })
 
