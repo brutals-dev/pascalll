@@ -13,13 +13,14 @@ const client = new Client({
 client.commands = new Collection();
 
 /* =========================
-   COMMAND LOADER
+   LOAD COMMANDS
 ========================= */
+
 console.log("🚀 Starting bot...");
 
 const commandPath = path.join(__dirname, "commands");
 
-const commandFiles = fs.readdirSync(commandPath).filter(file => file.endsWith(".js"));
+const commandFiles = fs.readdirSync(commandPath).filter(f => f.endsWith(".js"));
 
 console.log("📦 Commands found:", commandFiles);
 
@@ -29,17 +30,19 @@ for (const file of commandFiles) {
   const command = require(filePath);
 
   if (!command.name || !command.execute) {
-    console.log("❌ Invalid command:", file);
+    console.log("❌ Invalid command file:", file);
     continue;
   }
 
   client.commands.set(command.name, command);
+
   console.log("✅ Loaded command:", command.name);
 }
 
 /* =========================
    MESSAGE HANDLER
 ========================= */
+
 client.on("messageCreate", (message) => {
   console.log("💬 Message:", message.content);
 
@@ -57,20 +60,21 @@ client.on("messageCreate", (message) => {
   const command = client.commands.get(cmd);
 
   if (!command) {
-    console.log("❌ Command NOT FOUND:", cmd);
+    console.log("❌ Command not found:", cmd);
     return;
   }
 
   try {
     command.execute(message, args);
   } catch (err) {
-    console.error("❌ Command error:", err);
+    console.error("❌ Error running command:", err);
   }
 });
 
 /* =========================
    READY EVENT
 ========================= */
+
 client.once("ready", () => {
   console.log(`🤖 ONLINE: ${client.user.tag}`);
 });
