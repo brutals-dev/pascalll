@@ -1,16 +1,9 @@
-const { EmbedBuilder } = require("discord.js");
-
 module.exports = {
   name: "ad",
+
   execute(message) {
-
-    const embed = new EmbedBuilder()
-      .setColor("#f3d6df")
-      .setTitle("✦ PASCAL CLOTHING ✦")
-      .setDescription("Ad system working perfectly!")
-      .setFooter({ text: "Pascal Clothing ♡" })
-      .setTimestamp();
-
-    message.channel.send({ embeds: [embed] });
+    message.channel.send({
+      content: "✦ PASCAL CLOTHING AD ✦\n\n✨ Premium Roblox Clothing\n🎁 Weekly Giveaways\n💞 Active Community\n\ndiscord.gg/pascal"
+    });
   }
 };
